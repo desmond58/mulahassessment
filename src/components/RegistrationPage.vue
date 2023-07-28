@@ -18,11 +18,9 @@
 
     <div class="input-container">
       <label for="email">Email</label>
-      <div v-if="!noEmail">
-        <input type="text" id="email" v-model="email" placeholder="Email Address">
-        <div v-if="!email" class="validation">*Please insert a valid email address</div>
-      </div>
-      <div v-else>No Email Address</div>
+      <input v-if="!noEmail" type="text" id="email" v-model="email" placeholder="Email Address">
+      <div v-if="!email && !noEmail" class="validation">*Please insert a valid email address</div>
+      <div v-if="noEmail" class="email-text">No Email Address</div>
     </div>
 
     <div class="text-box">
@@ -90,7 +88,7 @@ export default {
   font-family: 'Roboto', sans-serif;
   font-size: 60px;
   font-weight: bold;
-  color: orange;
+  color: darkorange;
   margin-bottom: 20px;
 }
 
@@ -121,12 +119,19 @@ export default {
   text-align: left;
 }
 
-.input-container input[type="text"] {
+.input-container input {
   font-size: 16px;
   padding: 5px;
-  border: none;
-  border-bottom: 1px solid black;
+  margin-top: 5px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
   width: 100%;
+}
+
+.email-text {
+  font-size: 16px;
+  margin-top: 20px;
+  text-align: left;
 }
 
 .validation {
@@ -153,7 +158,7 @@ export default {
 }
 
 .line {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid lightgrey;
   margin-bottom: 20px;
 }
 
@@ -167,33 +172,38 @@ export default {
   text-decoration: none;
 }
 
-/* Media queries for responsiveness */
 @media (max-width: 640px) {
   .container {
     padding: 10px;
   }
 
   .header {
-    font-family: 'Roboto', sans-serif;
-    font-size: 50px;
+    font-size: 30px;
     text-align: center;
   }
 
   .registration {
-    font-size: 70px;
-    text-align: center;
+    font-size: 40px;
+    text-align: left;
   }
 
   .sub-header {
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
   }
 
   .input-container label {
     font-size: 14px;
   }
 
-  .input-container input[type="text"] {
+  .input-container input {
     font-size: 14px;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    width: 100%;
   }
 
   .text-box {
@@ -202,16 +212,19 @@ export default {
 
   .continue-button {
     font-size: 14px;
-  }
-
-  .line {
-    width: 260px;
-    text-align: center;
+    margin-bottom: 10px;
+    width: 50%;
   }
 
   .powered-by {
     font-size: 14px;
     margin-right: 0;
+  }
+
+  .validation {
+    margin-top: 10px;
+    font-style: italic;
+    color: darkred;
   }
 }
 </style>
